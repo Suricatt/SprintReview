@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ru.yarvet.sprint_description_builder.IssueTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 sec

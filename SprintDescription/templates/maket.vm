@@ -1,0 +1,38 @@
+
+#set ($padding = "padding: 7px 0 5px 7px")
+#set ($issuePadding = "padding: 10px 0 0 5px")
+#set ($borderRadius = "10px")
+#set ($borderHeader = "border-bottom: 1px solid rgba(0,0,0, .2);box-shadow: 0 10px 20px -5px rgba(0,0,0, .2);border-bottom-left-radius: ${borderRadius}; border-bottom-right-radius: ${borderRadius}")
+#set ($headerStyles = "$borderHeader; $padding")
+#set ($commonStyle = "overflow: hidden")
+<body>
+    <h1>$sprint</h1>
+    <ul>
+    #foreach($subsystem in $sprintSubsystems.getSubsystems().keySet())
+    	<li style="background: #D3D3D3;${commonStyle};${borderHeader};padding: 15px 0 10px 15px";font-size: 20px>$subsystem</li>
+    	#if ($sprintSubsystems.getError($subsystem).size() > 0 )
+    	<li  style="background: #EE997C;${commonStyle};${headerStyles}">$errorsHeader</li>
+
+    	#foreach($issue in $sprintSubsystems.getError($subsystem))
+    		<li style="${commonStyle}">
+    		<div  style = "$issuePadding"><b>1C-${issue.getField("numberInProject")} ${issue.getSummary()}</b></div>
+    		#if($issue.getDescription() !=$null)
+    		<div style = "padding: 5px 0 0 10px">$issue.getDescription()</div>
+    		#end
+    		</li>
+    	#end
+    	#end
+    	#if ($sprintSubsystems.getIssue($subsystem).size() > 0 )
+    	<li style="background: #ABC7EA;${commonStyle};${headerStyles}">$issuesHeader</li>
+    	#foreach($issue in $sprintSubsystems.getIssue($subsystem))	
+    	<li style="${commonStyle}">
+    		<div style = "$issuePadding"><b>1C-${issue.getField("numberInProject")} ${issue.getSummary()}</b></div>
+    		#if($issue.getDescription() != $null)
+    		<div style = "padding: 5px 0 0 10px">$issue.getDescription()</div>
+    		#end
+    	</li>	
+    	#end
+    	#end	
+    #end
+    </ul>	
+</body>
